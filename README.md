@@ -5,7 +5,7 @@
 
 ## 六角學院提供資源
 * [TodoList設計稿](https://www.figma.com/file/pFivfS3rDX3N3u3dN9aIlx/TodoList?node-id=0%3A1)
-* [TodoListAPI文件](https://todoo.5xcamp.us/api-docs/index.html
+* [API文件](https://todoo.5xcamp.us/api-docs/index.html
 
 ## 最終作業要求
 * 必做：需使用 React 框架來挑戰，並整合此任務提供的 API
