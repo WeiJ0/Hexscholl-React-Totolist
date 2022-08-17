@@ -134,7 +134,7 @@ export default function SignUp() {
                         <span className="err_text">{userInput.err_password}</span>
                     </div>
                     <div className="input_control">
-                        <label htmlFor="tbx_pwd2">密碼</label>
+                        <label htmlFor="tbx_pwd2">再次輸入密碼</label>
                         <input className={userInput.err_password2 ? 'err' : ''} id='tbx_pwd2' name='password2' type="password" placeholder="請再次輸入密碼" onChange={typeInput} />
                         <span className="err_text">{userInput.err_password2}</span>
                     </div>

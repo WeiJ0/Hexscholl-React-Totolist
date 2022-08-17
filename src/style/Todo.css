@@ -25,17 +25,23 @@ header span {
   justify-content: space-around;
 }
 
+.header_tool h3 span {
+  margin: 0 10px;
+}
+
 .header_tool a {
   color: #333333;
   cursor: pointer;
 }
 
 .content {
+  position: relative;
   width: 500px;
   margin: auto;
 }
 
 .newTodo {
+  position: relative;
   width: 100%;
   display: flex;
   align-items: center;
@@ -73,12 +79,53 @@ header span {
 }
 
 .todoList {
+  position: relative;
   width: 100%;
   margin-top: 1rem;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
+
+.newTodo::after,
+.todoList::after {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  height: 0;
+  width: 100%;
+  border-radius: 10px;
+  background-size: 400% 400%;
+  background-image: linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(0, 0, 0, 0.25) 25%,
+    rgba(0, 0, 0, 0.35) 51%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  z-index: 999;
+  cursor: wait;
+  animation: animateBackground 5s ease infinite;
+}
+
+@keyframes animateBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.isLoading.newTodo::after,
+.isLoading.todoList::after {
+  height: 100%;
+}
+
 .todoList_tab {
   display: flex;
   justify-content: space-around;

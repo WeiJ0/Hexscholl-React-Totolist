@@ -35,8 +35,10 @@ export default function Todo() {
     const [isLoading, setLoading] = useState(true);
     useEffect(() => {
         let userData = getUserData();
-        if (!userData)
+        if (!userData) {
             navigate("/", { replace: true })
+            return;
+        }
         else
             setUser(userData);
 
@@ -100,8 +102,11 @@ export default function Todo() {
         await getTodoList();
     };
     const removeFinished = async () => {
-        setLoading(true);
         let finished = todoListItems.filter((item) => item.completed_at);
+        if (finished.length == 0)
+            return;
+        setLoading(true);
+
         for (let i = 0; i < finished.length; i++) {
             await apiDelTodo({ id: finished[i]["id"] }).catch(err => {
                 setErrNotice(err);
@@ -121,12 +126,12 @@ export default function Todo() {
             <header>
                 <img className="header_logo" src={logo} alt={"logo"} />
                 <div className="header_tool">
-                    <h3>{user.nickname}的待辦</h3>
+                    <h3><span>{user.nickname}</span>的待辦</h3>
                     <a onClick={logout}>登出</a>
                 </div>
             </header>
             <section className="content">
-                <div className="newTodo">
+                <div className={isLoading ? "isLoading newTodo" : "newTodo"}>
                     <input value={newTodo} type="text" placeholder="新增待辦事項" onChange={(e) => setNewTodo(e.target.value)} />
                     <button onClick={addTodo}>
                         <i className="fa fa-plus"></i>
@@ -137,7 +142,7 @@ export default function Todo() {
                     {isLoading ? <span><img height="100px" src={loading} /></span> : ''}
                 </div>
                 {todoListItems.length > 0 ? (
-                    <div className="todoList">
+                    <div className={isLoading ? "isLoading todoList" : "todoList"}>
                         <ul className="todoList_tab">
                             {statusList.map((item) => {
                                 const { code, name } = item;
@@ -166,7 +171,7 @@ export default function Todo() {
                         </ul>
                         <div className="todoList_footer">
                             <p>
-                                {todoListItems.filter((item) => !item.finished).length}
+                                {todoListItems.filter((item) => !item.completed_at).length}
                                 個待完成項目
                             </p>
                             <a onClick={removeFinished}>清除已完成項目</a>

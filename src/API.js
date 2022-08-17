@@ -12,7 +12,8 @@ let optionBase = {
 const userRequest = (method, path, data) => {
   let optionObject = Object.assign({}, { ...optionBase, method });
   if (method === "POST") optionObject.body = JSON.stringify(data);
-  
+  optionObject.headers.Authorization = '';
+
   return fetch(`${API_URL}/users/${path}`, optionObject);
 };
 

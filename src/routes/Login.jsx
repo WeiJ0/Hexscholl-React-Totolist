@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { getUserData, setUserData } from '../common';
+import dayjs from 'dayjs';
 import { apiLogin } from '../API';
 
 import HomeLeft from '../component/HomeLeft';
@@ -65,6 +66,7 @@ export default function Login() {
                     else {
                         userData.email = email;
                         userData.nickname = nickname;
+                        userData.date = dayjs().format("YYYY-MM-DD");
                         setUserData(userData);
                         navigate("/Todo/", { replace: true });
                     }
